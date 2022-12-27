@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+}
+html body #root{
+    height: 100vh;
+}
+.Home{
+    background-image: url("../Resources/Images/Logos/WorldCupLogo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30%;
+    height: 100%;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    justify-self: left;
+}
+.btn-layout{
+    text-decoration: none;
+    color: white;
+    width: 25%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+.btn-layout:hover{
+    background-color: #690735;
+}
+.Home:hover{
+    background-color: #690735;
+}
+.child-layout{
+    height: 100%;
+    width: 15%;
+    flex-grow: 1;
+    align-items: center;
+    display: flex;
+}
+.child-layout#left{
+    justify-content: left;
+}
+.child-layout#right{
+    justify-content: right;
+}
+.layout{
+    background-color: #56042c;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 15%;
+}
