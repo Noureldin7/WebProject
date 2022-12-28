@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+}
+html body #root{
+    height: 100vh;
+}
+#team span{
+    margin-top: 5px;
+    text-align: center;
+    font-size: 40px;
+    width: 100%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.details{
+    font-size: x-large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    border-radius: 10px;
+}
+.teams{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#team{
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.stadium{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+}
+.row{
+    display: flex;
+}
+.seat{
+    margin: 10px;
+    width: 25px;
+    height: 25px;
+}
+.free:hover{
+    background-color: coral;
+}
+.seat:hover{
+    cursor: pointer;
+}
+.free{
+    background-color: red;
+}
+.reserved{
+    background-color: blue;
+}
+.taken{
+    background-color: brown;
+}

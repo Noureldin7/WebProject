@@ -5,6 +5,7 @@ import Layout from "./Pages/Layout";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
+import Reservation from "./Pages/Reservation";
 import Error from "./Pages/Error";
 
 function RouterX(){
@@ -14,6 +15,7 @@ function RouterX(){
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path="/reservation" element={<Reservation/>}/>
                     <Route path="/signup" element={<Signup/>}/>
                     <Route path="*" element={<Error/>}/>
                 </Route>
