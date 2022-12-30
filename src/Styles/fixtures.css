@@ -63,3 +63,6 @@ span{
     background-color: lightcyan;
     cursor: pointer;
 }
+button{
+    margin: 10px;
+}

@@ -1,82 +1,65 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import {post,get} from "../utils/APICallers"
+import {patch,get} from "../utils/APICallers"
 
 import "../Styles/Form.css";
 import "../Styles/reservation.css";
-import franceLogo from "../Resources/Images/Flags/France.png"
-import argentinaLogo from "../Resources/Images/Flags/Argentina.webp"
 import dummyFlag from "../Resources/Images/Flags/dummy.png"
+import { useSearchParams } from "react-router-dom";
 
-// const teams = [
-//     {
-//         flag:dummyFlag,
-//         name:"-"
-//     },
-//     {
-//         flag:argentinaLogo,
-//         name:"Argentina"
-//     },
-//     {
-//         flag:franceLogo,
-//         name:"France"
-//     },
-// ]
-// const staff = [
-//     {
-//         name:"StaffX",
-//         type:"linesman",
-//     },
-//     {
-//         name:"StaffY",
-//         type:"referee",
-//     },
-//     {
-//         name:"StaffZ",
-//         type:"linesman",
-//     },
-//     {
-//         name:"StaffW",
-//         type:"referee",
-//     },
-// ]
-// const stadiums = [
-    //     "StadiumX",
-    //     "StadiumY",
-    //     "StadiumZ"
-    // ]
-    
-function CreateMatch() {
+  
+function EditMatch() {
+    async function update(date)
+    {
+        await updateStadiums(date)
+        await updateStaff(date)
+        await updateTeams(date)
+    }
+    const [params, setParams] = useSearchParams();
+    const matchId = params.get("id");
+    const [match, setMatch] = useState();
     const [firstFlag,setFirstFlag] = useState(dummyFlag);
     const [secondFlag,setSecondFlag] = useState(dummyFlag);
-    const [stadiums,setStadiums] = useState(["Choose a Kick-Off Time"]);
-    const [teams,setTeams] = useState([{flag:dummyFlag,name:"Choose a Kick-Off Time"}]);
+    const [stadiums,setStadiums] = useState([]);
+    const [teams,setTeams] = useState([]);
     const [staff,setStaff] = useState([]);
+    useEffect(()=>{
+        get('http://localhost:3001/api/match/'+matchId).then((res)=>{
+            res.json().then(async (data)=>{
+                setMatch({
+                    firstTeam:data.firstTeam._id,
+                    secondTeam:data.secondTeam._id,
+                    stadium:data.stadium._id,
+                    dateTime:new Date(data.dateTime).toISOString().slice(0,-1),
+                    referee:data.referee._id,
+                    firstLinesman:data.firstLinesman._id,
+                    secondLinesman:data.secondLinesman._id,
+                })
+                console.log(data.dateTime)
+                await update(new Date(data.dateTime))
+                setTeams([...teams,data.firstTeam,data.secondTeam])
+                setStaff([...staff,data.firstLinesman,data.secondLinesman,data.referee])
+                setStadiums([...stadiums,data.stadium])
+            })
+        })
+    },[matchId])
     var linesmen = staff.filter((member)=>{
         return member.type==="linesman"
     })
-    linesmen = [{name:"-",type:"linesman"},...linesmen]
+    // linesmen = [{name:"-",type:"linesman"},...linesmen]
     var refs = staff.filter((member)=>{
         return member.type==="referee"
     })
-    refs = [{name:"-",type:"referee"},...refs]
-    const [match, setMatch] = useState({
-        firstTeam : "",
-        secondTeam : "",
-        referee : "",
-        firstLinesman : "",
-        secondLinesman : "",
-        dateTime : "",
-        stadium : ""
-    });
+    // refs = [{name:"-",type:"referee"},...refs]
+    // console.log(match)
     function handleChange(e){
         const key = e.target.name
         const value = e.target.value
         setMatch({...match,[key]:value})
     }
-    async function updateStadiums(e)
+    async function updateStadiums(date)
     {
-        var response = await get('http://localhost:3001/api/stadium/',{startDate:e.target.value})
+        var response = await get('http://localhost:3001/api/stadium/',{startDate:date})
         if(response.status===200)
         {
             response = await response.json()
@@ -84,23 +67,23 @@ function CreateMatch() {
             setStadiums(["-",...response])
         }
     }
-    async function updateTeams(e)
+    async function updateTeams(date)
     {
-        var response = await get('http://localhost:3001/api/team/',{startDate:e.target.value})
+        var response = await get('http://localhost:3001/api/team/',{startDate:date})
         if(response.status===200)
         {
             response = await response.json()
-            console.log(response)
+            // console.log(response)
             setTeams([{flag:dummyFlag,name:"-"},...response])
         }
     }
-    async function updateStaff(e)
+    async function updateStaff(date)
     {
-        var response = await get('http://localhost:3001/api/staff/',{startDate:e.target.value})
+        var response = await get('http://localhost:3001/api/staff/',{startDate:date})
         if(response.status===200)
         {
             response = await response.json()
-            console.log(response)
+            // console.log(response)
             linesmen = staff.filter((member)=>{
                 return member.type==="linesman"
             })
@@ -110,12 +93,11 @@ function CreateMatch() {
             setStaff(response)
         }
     }
-    async function handleCreateMatch(e){
+    async function handleEditMatch(e){
         try {
             e.preventDefault();
-            // console.log(match)
-            // return
-            var response = await post('http://localhost:3001/api/match/create',match);
+            const date = match.dateTime+'Z';
+            var response = await patch('http://localhost:3001/api/match/edit/'+matchId,{...match,dateTime:date});
             const status = response.status
             response = await response.json()
             console.log(response)
@@ -125,7 +107,7 @@ function CreateMatch() {
             }
             else
             {
-                alert(response.message);
+                alert(response.error);
             }
         }
         catch (error) {
@@ -133,14 +115,14 @@ function CreateMatch() {
         }
     }
     return (
-        <form className="page" style={{height:"100%"}} action="/" onSubmit={handleCreateMatch}>
+        match && <form className="page" style={{height:"100%"}} action="/" onSubmit={handleEditMatch}>
             <div className="details" style={{height:"100%"}} id="#match">
                 <div className="teams">
                     <div className="team" id="team">
                         <img src={firstFlag} alt="Error" height="120px" />
                         <select name="firstTeam" id="firstTeam" onChange={(e)=>{handleChange(e);setFirstFlag(e.target.children[e.target.selectedIndex].id)}}>
                             {teams.map((team)=>{
-                                return <option label={team.name} value={team._id} key={team.flag} id={team.flag}></option>
+                                return <option label={team.name} selected={team._id===match.firstTeam} value={team._id} key={team._id+'1'} id={team.flag}></option>
                             })}
                         </select>
                     </div>
@@ -148,44 +130,43 @@ function CreateMatch() {
                         <img src={secondFlag} alt="Error" height="120px" />
                         <select name="secondTeam" id="secondTeam" onChange={(e)=>{handleChange(e);setSecondFlag(e.target.children[e.target.selectedIndex].id)}}>
                             {teams.map((team)=>{
-                                return <option label={team.name} value={team._id} key={team.flag} id={team.flag}></option>
+                                return <option label={team.name} selected={team._id===match.secondTeam} value={team._id} key={team._id+'2'} id={team.flag}></option>
                             })}
                         </select>
                     </div>
                 </div>
                 <label htmlFor="dateTime">Kick-Off</label>
-                <input type="datetime-local" name="dateTime" value={match.dateTime} onChange={(e)=>{handleChange(e);updateStadiums(e);updateTeams(e);updateStaff(e)}}/>
+                <input type="datetime-local" name="dateTime" value={match.dateTime} onChange={(e)=>{handleChange(e);update(e.target.value);}}/>
                 <label htmlFor="stadium">Stadium</label>
                 <select name="stadium" id="stadium" onChange={handleChange}>
                     {stadiums.map((stadium)=>{
-                        return <option label={stadium.name} value={stadium._id} key={stadium.name}></option>
+                        return <option label={stadium.name} selected={stadium._id===match.stadium} value={stadium._id} key={stadium._id+'3'}></option>
                     })}
                 </select>
-                {/* <input type="text" name="stadium" value={match.stadium} onChange={handleChange} /> */}
                 <div className="refs">
                     <label htmlFor="referee">Referee</label>
                     <select name="referee" id="referee" onChange={handleChange}>
                         {refs.map((member)=>{
-                            return <option label={member.name} value={member._id} key={member.name}></option>
+                            return <option label={member.name} selected={member._id===match.referee} value={member._id} key={member._id+'4'}></option>
                         })}
                     </select>
                     <label htmlFor="firstLinesman">Lineman 1</label>
                     <select name="firstLinesman" id="firstLinesman" onChange={handleChange}>
                         {linesmen.map((member)=>{
-                            return <option label={member.name} value={member._id} key={member.name}></option>
+                            return <option label={member.name} selected={member._id===match.firstLinesman} value={member._id} key={member._id+'5'}></option>
                         })}
                     </select>
                     <label htmlFor="secondLinesman">Lineman 2</label>
                     <select name="secondLinesman" id="secondLinesman" onChange={handleChange}>
                         {linesmen.map((member)=>{
-                            return <option label={member.name} value={member._id} key={member.name}></option>
+                            return <option label={member.name} selected={member._id===match.secondLinesman} value={member._id} key={member._id+'6'}></option>
                         })}
                     </select>
                 </div>
-                <button type="submit">Schedule Fixture</button>
+                <button type="submit">Confirm Modifications</button>
             </div>
         </form>
     );
 }
 
-export default CreateMatch;
+export default EditMatch;

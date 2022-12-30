@@ -49,12 +49,26 @@ input{
     border-width: 2px;
 }
 button{
-    height: 30px;
+    height: 40px;
     border-width: 2px;
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     border-radius: 5px;
 }
 .radios{
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+select{
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    margin: 10px;
+    height: 30px;
+    width: 140px;
+    border-width: 2px;
+}
+button:hover{
+    cursor: pointer;
 }

@@ -6,6 +6,8 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Reservation from "./Pages/Reservation";
+import MatchCreate from "./Pages/MatchCreate";
+import MatchEdit from "./Pages/MatchEdit";
 import Error from "./Pages/Error";
 
 function RouterX(){
@@ -15,8 +17,12 @@ function RouterX(){
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
-                    <Route path="/reservation" element={<Reservation/>}/>
                     <Route path="/signup" element={<Signup/>}/>
+                    <Route path="/reservation" element={<Reservation/>}/>
+                    <Route path="/match">
+                        <Route path="/match/create" element={<MatchCreate/>}/>
+                        <Route path="/match/edit" element={<MatchEdit/>}/>
+                    </Route>
                     <Route path="*" element={<Error/>}/>
                 </Route>
             </Routes>
