@@ -4,49 +4,13 @@ import {post,get} from "../utils/APICallers"
 
 import "../Styles/Form.css";
 import "../Styles/reservation.css";
-import franceLogo from "../Resources/Images/Flags/France.png"
-import argentinaLogo from "../Resources/Images/Flags/Argentina.webp"
 import dummyFlag from "../Resources/Images/Flags/dummy.png"
+import { useNavigate, useOutletContext } from "react-router-dom";
 
-// const teams = [
-//     {
-//         flag:dummyFlag,
-//         name:"-"
-//     },
-//     {
-//         flag:argentinaLogo,
-//         name:"Argentina"
-//     },
-//     {
-//         flag:franceLogo,
-//         name:"France"
-//     },
-// ]
-// const staff = [
-//     {
-//         name:"StaffX",
-//         type:"linesman",
-//     },
-//     {
-//         name:"StaffY",
-//         type:"referee",
-//     },
-//     {
-//         name:"StaffZ",
-//         type:"linesman",
-//     },
-//     {
-//         name:"StaffW",
-//         type:"referee",
-//     },
-// ]
-// const stadiums = [
-    //     "StadiumX",
-    //     "StadiumY",
-    //     "StadiumZ"
-    // ]
     
 function CreateMatch() {
+    const navigate = useNavigate()
+    const [auth,setAuth] = useOutletContext();
     const [firstFlag,setFirstFlag] = useState(dummyFlag);
     const [secondFlag,setSecondFlag] = useState(dummyFlag);
     const [stadiums,setStadiums] = useState(["Choose a Kick-Off Time"]);
@@ -76,7 +40,7 @@ function CreateMatch() {
     }
     async function updateStadiums(e)
     {
-        var response = await get('http://localhost:3001/api/stadium/',{startDate:e.target.value})
+        var response = await get('http://localhost:3001/api/stadium/',auth.token,{startDate:e.target.value})
         if(response.status===200)
         {
             response = await response.json()
@@ -86,7 +50,7 @@ function CreateMatch() {
     }
     async function updateTeams(e)
     {
-        var response = await get('http://localhost:3001/api/team/',{startDate:e.target.value})
+        var response = await get('http://localhost:3001/api/team/',auth.token,{startDate:e.target.value})
         if(response.status===200)
         {
             response = await response.json()
@@ -96,7 +60,7 @@ function CreateMatch() {
     }
     async function updateStaff(e)
     {
-        var response = await get('http://localhost:3001/api/staff/',{startDate:e.target.value})
+        var response = await get('http://localhost:3001/api/staff/',auth.token,{startDate:e.target.value})
         if(response.status===200)
         {
             response = await response.json()
@@ -113,15 +77,14 @@ function CreateMatch() {
     async function handleCreateMatch(e){
         try {
             e.preventDefault();
-            // console.log(match)
-            // return
-            var response = await post('http://localhost:3001/api/match/create',match);
+            var response = await post('http://localhost:3001/api/match/create',auth.token,match);
             const status = response.status
             response = await response.json()
             console.log(response)
             if(status===200)
             {
-                e.target.submit()
+                navigate("/")
+                // e.target.submit()
             }
             else
             {
@@ -137,7 +100,7 @@ function CreateMatch() {
             <div className="details" style={{height:"100%"}} id="#match">
                 <div className="teams">
                     <div className="team" id="team">
-                        <img src={firstFlag} alt="Error" height="120px" />
+                        <img src={firstFlag} alt="Error" height="100px" />
                         <select name="firstTeam" id="firstTeam" onChange={(e)=>{handleChange(e);setFirstFlag(e.target.children[e.target.selectedIndex].id)}}>
                             {teams.map((team)=>{
                                 return <option label={team.name} value={team._id} key={team.flag} id={team.flag}></option>
@@ -145,7 +108,7 @@ function CreateMatch() {
                         </select>
                     </div>
                     <div className="team" id="team">
-                        <img src={secondFlag} alt="Error" height="120px" />
+                        <img src={secondFlag} alt="Error" height="100px" />
                         <select name="secondTeam" id="secondTeam" onChange={(e)=>{handleChange(e);setSecondFlag(e.target.children[e.target.selectedIndex].id)}}>
                             {teams.map((team)=>{
                                 return <option label={team.name} value={team._id} key={team.flag} id={team.flag}></option>
@@ -161,7 +124,6 @@ function CreateMatch() {
                         return <option label={stadium.name} value={stadium._id} key={stadium.name}></option>
                     })}
                 </select>
-                {/* <input type="text" name="stadium" value={match.stadium} onChange={handleChange} /> */}
                 <div className="refs">
                     <label htmlFor="referee">Referee</label>
                     <select name="referee" id="referee" onChange={handleChange}>

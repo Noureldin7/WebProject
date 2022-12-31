@@ -18,7 +18,7 @@ html body #root{
 .btn-layout{
     text-decoration: none;
     color: white;
-    width: 25%;
+    /* width: 25%; */
     height: 100%;
     display: flex;
     align-items: center;

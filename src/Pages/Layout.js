@@ -1,15 +1,18 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Outlet} from "react-router-dom";
 import {Link} from "react-router-dom";
 
 import "../Styles/Layout.css";
 
+
+
 function Layout() {
     function handleSignout(){
         localStorage.removeItem("token");
-        setToken(null);
+        localStorage.removeItem("role");
+        setAuth({token:null, role:0});
     }
-    const [token,setToken] = useState(localStorage.getItem("token")??null)
+    const [auth,setAuth] = useState({token:localStorage.getItem("token")??null, role:localStorage.getItem("role")??0})
     return (
         <>
             <div className="layout">
@@ -17,7 +20,7 @@ function Layout() {
                     <Link className="Home" to={'/'}></Link>
                 </div>
                 {
-                    token?
+                    auth.role>0?
                         <div className="child-layout" id="right">
                             <Link className="btn-layout" to={'/login'}>View Profile</Link>
                             <Link className="btn-layout" to={'/'} onClick={handleSignout}>Signout</Link>
@@ -29,7 +32,7 @@ function Layout() {
                         </div>
                 }
             </div>
-            <Outlet/>
+            <Outlet context={[auth,setAuth]}/>
         </>
     );
 }

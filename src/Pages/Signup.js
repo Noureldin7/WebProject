@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import {post} from "../utils/APICallers"
 
 import "../Styles/Form.css";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 
 function Signup() {
+    const navigate = useNavigate()
+    const [auth, setAuth] = useOutletContext()
     const [user, setUser] = useState({
         username : "",
         firstName : "",
@@ -25,13 +28,14 @@ function Signup() {
     async function handleSignUp(e){
         try {
             e.preventDefault();
-            var response = await post('http://localhost:3001/api/signup',user);
+            var response = await post('http://localhost:3001/api/signup',auth.token,user);
             const status = response.status
             response = await response.json()
             console.log(response)
             if(status===200)
             {
-                e.target.submit()
+                navigate("/login")
+                // e.target.submit()
             }
             else
             {
