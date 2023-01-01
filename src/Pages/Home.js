@@ -51,13 +51,13 @@ function Home() {
                             <div className="fixture" onClick={()=>navigate('/reservation?id='+fixture._id)}>
                                 <div className="team" id="left">
                                     <span>{fixture.firstTeam.name}</span>
-                                    <img src={fixture.firstTeam.flag} alt="x" height="50px" />
+                                    <img src={fixture.firstTeam.flag} alt="x" height="50px" className="flag"/>
                                 </div>
                                 <div className="time">
                                     <span>{String(new Date(fixture.dateTime).getHours()).padStart(2,'0')+":"+String(new Date(fixture.dateTime).getMinutes()).padStart(2,'0')}</span>
                                 </div>
                                 <div className="team" id="right">
-                                    <img src={fixture.secondTeam.flag} alt="x" height="50px" />
+                                    <img src={fixture.secondTeam.flag} alt="x" height="50px" className="flag"/>
                                     <span>{fixture.secondTeam.name}</span>
                                 </div>
                             </div>
