@@ -100,7 +100,7 @@ function CreateMatch() {
             <div className="details" style={{height:"100%"}} id="#match">
                 <div className="teams">
                     <div className="team" id="team">
-                        <img src={firstFlag} alt="Error" height="100px" />
+                        <img src={firstFlag} alt="Error" height="100px" className="flag"/>
                         <select name="firstTeam" id="firstTeam" onChange={(e)=>{handleChange(e);setFirstFlag(e.target.children[e.target.selectedIndex].id)}}>
                             {teams.map((team)=>{
                                 return <option label={team.name} value={team._id} key={team.flag} id={team.flag}></option>
@@ -108,7 +108,7 @@ function CreateMatch() {
                         </select>
                     </div>
                     <div className="team" id="team">
-                        <img src={secondFlag} alt="Error" height="100px" />
+                        <img src={secondFlag} alt="Error" height="100px" className="flag"/>
                         <select name="secondTeam" id="secondTeam" onChange={(e)=>{handleChange(e);setSecondFlag(e.target.children[e.target.selectedIndex].id)}}>
                             {teams.map((team)=>{
                                 return <option label={team.name} value={team._id} key={team.flag} id={team.flag}></option>

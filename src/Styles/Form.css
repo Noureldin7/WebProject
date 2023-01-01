@@ -6,63 +6,75 @@ html body #root{
 }
 .signup{
     font-size: larger;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     height: fit-content;
-    padding: 10px;
-    /* overflow-y: auto; */
-    /* border: 2px solid black; */
-    /* height: 70%; */
-    /* position: relative; */
-    /* bottom: 30%; */
-    /* width: 20%; */
-    /* left: 50%; */
-    /* transform: translate(-50%,50%); */
+    width: fit-content;
+    padding: 16px;
+    overflow-y: auto;
+    border: 2px solid black;
+    border-radius: 20px;
+    position: relative;
+    left: 50%;
+    margin: 32px 0px;
+    transform: translate( -40%, 0);
 }
 .login{
     font-size: larger;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     height: fit-content;
-    padding: 10px;
+    min-width: fit-content;
+    padding: 16px;
     overflow-y: auto;
     border: 2px solid black;
-    height: 70%;
+    border-radius: 20px;
     position: absolute;
     top: 50%;
-    width: 20%;
     left: 50%;
-    transform: translate(-50%,-40%);
+    transform: translate(-30%,-40%);
+}
+form label{
+    font-size: larger;
+    font-weight: 600;
+    color: #690735;
 }
 input{
-    margin: 10px;
-    height: 20px;
+    font-size: large;
+    margin: 16px 0px;
+    padding: 8px;
+    min-width: 300px;
+    min-width: 100%;
     border-radius: 5px;
-    border-width: 2px;
+    border: 2px solid black;
+    align-self: center;
+}
+input[type="radio"]{
+    min-width: 0;
 }
 button{
-    height: 40px;
     border-width: 2px;
-    font-size: large;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: larger;
     border-radius: 5px;
+    align-self: center;
+    padding: 8px 12px;
+    background-color: #690735;
+    color: white;
 }
 .radios{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    min-width: 400px;
 }
 select{
     font-size: large;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     text-align: center;
     margin: 10px;
     height: 30px;
