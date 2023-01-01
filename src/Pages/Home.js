@@ -35,7 +35,7 @@ function Home() {
     },[])
     console.log(fixtures)
     return (
-        fixtures.length!=0 && <>
+        <>
             <div className="page">
                 <h2>Fixtures</h2>
                 <div className="matchDay">
@@ -48,7 +48,7 @@ function Home() {
                             {
                                 printDay?<h3>{fixture.day}</h3>:<></>
                             }
-                            <div className="fixture" onClick={()=>navigate('/reservation?id='+fixture._id)}>
+                            <div className="fixture" id="fixture" onClick={()=>navigate('/reservation?id='+fixture._id)}>
                                 <div className="team" id="left">
                                     <span>{fixture.firstTeam.name}</span>
                                     <img src={fixture.firstTeam.flag} alt="x" height="50px" />
@@ -65,7 +65,11 @@ function Home() {
                         );
                     })}
                 </div>
-                {auth.role>1&&<button onClick={()=>navigate('/match/create')}>Create a Match</button>}
+                <section className="btns">
+                    {auth.role===2&&<button onClick={()=>navigate('/match/create')}>Create a Match</button>}
+                    {auth.role===2&&<button onClick={()=>navigate('/stadium/create')}>Create a Stadium</button>}
+                    {auth.role===3&&<button onClick={()=>navigate('/admin/users')}>View Users</button>}
+                </section>
             </div>
         </>
     );

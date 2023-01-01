@@ -5,7 +5,7 @@ import "../Styles/reservation.css"
 function Seat({rowNumber,state,reservedSeats,setReservedSeats}) {
     const [status, setStatus] = useState(state);
     function handleClick(){
-        if(status===-1)
+        if(status<0)
         {
             return;
         }
@@ -23,7 +23,7 @@ function Seat({rowNumber,state,reservedSeats,setReservedSeats}) {
         }
     }
     return (
-        <div className={status===0 ? "seat free" : (status===1) ? "seat reserved" : "seat taken"} onClick={handleClick}></div>
+        <div className={status===0 || status===-2? "seat free" : (status===1) ? "seat reserved" : "seat taken"} onClick={handleClick}></div>
     );
 }
 

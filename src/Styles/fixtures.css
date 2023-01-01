@@ -59,7 +59,7 @@ span{
     justify-content: left;
 }
 
-.fixture:hover{
+#fixture:hover{
     background-color: lightcyan;
     cursor: pointer;
 }
