@@ -23,15 +23,17 @@ function Login() {
                 });
                 const status = response.status
                 response = await response.json()
-                const roleStr = response.user.role
-                const isApproved = response.user.isApproved
-                const token = response.token
                 if(status===200)
                 {
+                    const roleStr = response.user.role
+                    const id = response.user._id
+                    const isApproved = response.user.isApproved
+                    const token = response.token
                     localStorage.setItem("token",token);
                     const role = roleStr==="customer"?1:(roleStr==="admin"?3:(isApproved&&roleStr==="manager"?2:1))
                     localStorage.setItem("role",role);
-                    setAuth({token,role})
+                    localStorage.setItem("id",id);
+                    setAuth({token,role,id})
                     navigate("/")
                 }
                 else
@@ -41,7 +43,6 @@ function Login() {
             }
             else
             {
-                console.log("first")
                 alert("Populate the fields");
                 //Replace with a modal
             }

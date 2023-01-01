@@ -102,8 +102,8 @@ function Reservation() {
                     </div>
                 </section>
                 <section className="btns">
-                    {auth.role>1&&<button onClick={()=>navigate("/match/edit?id="+ matchId)}>Edit Fixture</button>}
-                    {auth.role>0&&<button onClick={handleReserve}>Reserve Seats</button>}
+                    {auth.role==2&&<button onClick={()=>navigate("/match/edit?id="+ matchId)}>Edit Fixture</button>}
+                    {auth.role%3>0&&<button onClick={handleReserve}>Reserve Seats</button>}
                 </section>
             </div>
         </>
