@@ -4,7 +4,7 @@
 html body #root{
     height: 100vh;
 }
-.signup{
+form{
     font-size: larger;
     background-color: white;
     display: flex;
@@ -17,24 +17,14 @@ html body #root{
     overflow-y: auto;
     border: 2px solid black;
     border-radius: 20px;
+}
+.signup{
     position: relative;
     left: 50%;
     margin: 32px 0px;
     transform: translate( -40%, 0);
 }
 .login{
-    font-size: larger;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    height: fit-content;
-    min-width: fit-content;
-    padding: 16px;
-    overflow-y: auto;
-    border: 2px solid black;
-    border-radius: 20px;
     position: absolute;
     top: 50%;
     left: 50%;
