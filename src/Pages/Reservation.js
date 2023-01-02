@@ -24,7 +24,7 @@ function Reservation() {
     const [auth,setAuth] = useOutletContext();
     const [reservedSeats,setReservedSeats] = useState([]);
     const [match,setMatch] = useState();
-    console.log(reservedSeats)
+    console.log(match)
     async function handleReserve()
     {
         const payload = {
@@ -60,6 +60,15 @@ function Reservation() {
                 setMatch(data);
             })
         })
+        // const poll = setInterval(()=>{
+        //     get('http://localhost:3001/api/match/'+matchId,auth.token).then((res)=>{
+        //         res.json().then((data)=>{
+        //             // console.log(match)
+        //             setMatch(data);
+        //         })
+        //     })
+        // },4000)
+        // return ()=>clearInterval(poll)
     },[matchId])
     return (
         match && <>
