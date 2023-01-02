@@ -75,11 +75,11 @@ function Reservation() {
             <div className="details">
                 <section className="teams">
                     <div className="team" id="team">
-                        <img src={match.firstTeam.flag} alt="x" height="100px" />
+                        <img src={match.firstTeam.flag} alt="x" height="100px" className="flag"/>
                         <span>{match.firstTeam.name}</span>
                     </div>
                     <div className="team" id="team">
-                        <img src={match.secondTeam.flag} alt="x" height="100px" />
+                        <img src={match.secondTeam.flag} alt="x" height="100px" className="flag" />
                         <span>{match.secondTeam.name}</span>
                     </div>
                 </section>

@@ -82,8 +82,8 @@ function ViewProfile() {
     }
     return (
         <div className="page">
-            <div className="groupContainer" style={{width:"80%"}}>
-                <form className="signup" action="/" onSubmit={handleEditProfile}>
+            <div className="groupContainer">
+                <form action="/" onSubmit={handleEditProfile}>
                     <h2>Profile Details</h2>
                     <label htmlFor="username">Username</label>
                     <input type="text" name="username" value={user.username} onChange={handleChange} />
@@ -115,7 +115,7 @@ function ViewProfile() {
                     </div> */}
                     <button type="submit" onClick={handleEditProfile}>Edit</button>
                 </form>
-                <form className="signup" action="/" onSubmit={handleChangePassword}>
+                <form action="/" onSubmit={handleChangePassword}>
                     <h2>Change Password</h2>
                     <label htmlFor="oldpassword">Old Password</label>
                     <input type="password" name="password" value={pass.password} onChange={handleChangePass} />

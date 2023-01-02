@@ -6,7 +6,6 @@ html, body, #root{
 }
 h2, h3{
     margin: 10px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 span{
     margin: 0 20px;
@@ -14,9 +13,12 @@ span{
     overflow-wrap: break-word;
 }
 .groupContainer{
+    padding: 16px;
     display: flex;
     align-items: flex-start;
-    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
 }
 .group{
     display: flex;
@@ -27,7 +29,6 @@ span{
 }
 .userContainer{
     font-size: large;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     margin: 10px;
     padding: 10px;
     display: flex;

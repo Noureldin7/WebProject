@@ -1,19 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
 *{
-    margin: 0;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Montserrat', sans-serif;
+	transition: all 0.4s;
+    color: #690735;
 }
-html body #root{
-    height: 100vh;
+html{
+	width: 100%;
+	min-height: 100%;
+	position: relative;
+}
+body{
+	height: 100%;
+	width: 100%;
+}
+#root{
+	height: 100%;
+	width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .Home{
-    background-image: url("../Resources/Images/Logos/WorldCupLogo.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 32%;
+    width: fit-content;
     height: 100%;
     border-radius: 0;
     margin: 0;
     padding: 0;
     justify-self: left;
+    display: flex;
 }
 .btn-layout{
     text-decoration: none;
@@ -24,7 +41,6 @@ html body #root{
     align-items: center;
     justify-content: center;
     font-size: x-large;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     padding: 0 20px;
     box-sizing: border-box;
 }
@@ -49,8 +65,30 @@ html body #root{
 }
 .layout{
     background-color: #56042c;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    height: 15%;
+	z-index: 1;
+	position: fixed;
+	top: 0;
+	justify-content: space-between;
+	overflow: hidden;
+	display: flex;
+	padding-left: 16px;
+	padding-right: 32px;
+	width: 100%;
+	height: 80px;
+}
+.logo{
+    padding: 8px;
+    height: 100%;
+}
+
+.PageData{
+    margin-top: 80px;
+    /* display: flex; */
+    /* justify-items: center; */
+    /*flex-direction: column; */
+}
+
+.flag{
+    border: 1px solid #56042c;
+    border-radius: 4px;
 }

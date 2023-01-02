@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 import "../Styles/Layout.css";
 
-
+const logoImage = require('../Resources/Images/Logos/WorldCupLogo.png');
 
 function Layout() {
     function handleSignout(){
@@ -18,7 +18,9 @@ function Layout() {
         <>
             <div className="layout">
                 <div className="child-layout" id="left">
-                    <Link className="Home" to={'/'}></Link>
+                    <Link className="Home" to={'/'}>
+                        <img src={String(logoImage)} alt="WorldCupIcon" className="logo"/>
+                    </Link>
                 </div>
                 {
                     auth.role>0?
@@ -33,7 +35,9 @@ function Layout() {
                         </div>
                 }
             </div>
-            <Outlet context={[auth,setAuth]}/>
+            <div className="PageData">
+                <Outlet context={[auth,setAuth]}/>
+            </div>
         </>
     );
 }

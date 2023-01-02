@@ -1,25 +1,16 @@
-*{
-    margin: 0;
-}
-html body #root{
-    height: 100vh;
-}
 #team span{
     margin-top: 5px;
     text-align: center;
     font-size: 40px;
     width: 100%;
-    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .details{
     font-size: x-large;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     margin: 20px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    /* height: 85%; */
     width: 100%;
     border-radius: 10px;
 }
@@ -61,6 +52,7 @@ html body #root{
     height: 25px;
 }
 .refs{
+    margin-top: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
