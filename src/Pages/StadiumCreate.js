@@ -73,18 +73,12 @@ function StadiumCreate() {
         <>
             <div className="details">
                 <div className="refs">
-                    <div className="ref">
                         <label htmlFor="name">Stadium Name</label>
                         <input type="text" name="name" value={stadium.name} onChange={handleChange}/>
-                    </div>
-                    <div className="ref">
                         <label htmlFor="rows">Rows</label>
                         <input type="number" name="rows" value={stadium.rows} onChange={handleChange}/>
-                    </div>
-                    <div className="ref">
                         <label htmlFor="seatsPerRow">Seats Per Row</label>
                         <input type="number" name="seatsPerRow" value={stadium.seatsPerRow} onChange={handleChange}/>
-                    </div>
                 </div>
                 <section className="stadium" style={{height:"275px"}}>
                     <div className="seats">

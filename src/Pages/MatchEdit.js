@@ -164,30 +164,24 @@ function EditMatch() {
                     </select>
                 </section>
                 <section className="refs">
-                    <div className="ref">
                         <label htmlFor="referee">Referee</label>
                         <select name="referee" id="referee" onChange={handleChange}>
                             {refs.map((member)=>{
                                 return <option label={member.name} selected={member._id===match.referee} value={member._id} key={member._id+'4'}></option>
                             })}
                         </select>
-                    </div>
-                    <div className="ref">
                         <label htmlFor="firstLinesman">Lineman 1</label>
                         <select name="firstLinesman" id="firstLinesman" onChange={handleChange}>
                             {linesmen.map((member)=>{
                                 return <option label={member.name} selected={member._id===match.firstLinesman} value={member._id} key={member._id+'5'}></option>
                             })}
                         </select>
-                    </div>
-                    <div className="ref">
                         <label htmlFor="secondLinesman">Lineman 2</label>
                         <select name="secondLinesman" id="secondLinesman" onChange={handleChange}>
                             {linesmen.map((member)=>{
                                 return <option label={member.name} selected={member._id===match.secondLinesman} value={member._id} key={member._id+'6'}></option>
                             })}
                         </select>
-                    </div>
                 </section>
                 <button type="submit">Confirm Modifications</button>
             </div>

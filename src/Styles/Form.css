@@ -17,6 +17,7 @@ form{
     overflow-y: auto;
     border: 2px solid black;
     border-radius: 20px;
+    margin: 16px 0;
 }
 .signup{
     position: relative;

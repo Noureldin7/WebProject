@@ -28,6 +28,7 @@ function AdminUsersView() {
         {
             alert("User Removed")
             setUsers(users.filter((user)=>user.username!==username))
+            setUnapprovedUsers(unapprovedUsers.filter((user)=>user.username!==username))
         }
         else
         {

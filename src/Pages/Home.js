@@ -13,8 +13,8 @@ const weekDays = [
     "Friday",
     "Saturday"
 ]
-var oldDay = "xday";
 function Home() {
+    var oldDay = "xday";
     const navigate = useNavigate();
     const [fixtures, setFixtures] = useState([]);
     const [auth,setAuth] = useOutletContext();
@@ -26,14 +26,14 @@ function Home() {
     })
     useEffect(()=>{
         var date6Days = new Date(Date.now());
-        date6Days.setDate(date6Days.getDate()+6)
+        date6Days.setDate(date6Days.getDate()+7)
         get('http://localhost:3001/api/match',"",{fromDate:new Date(Date.now()),toDate:date6Days}).then((res)=>{
             res.json().then((data)=>{
                 setFixtures(data);
             })
         })
     },[])
-    console.log(fixtures)
+    console.log(auth)
     return (
         <>
             <div className="page">
@@ -41,7 +41,7 @@ function Home() {
                 <div className="matchDay">
                     {
                     fixtures.map((fixture)=>{
-                        const printDay = fixture.day!==oldDay;
+                        const printDay = fixture.day!=oldDay;
                         oldDay = fixture.day;
                         return (
                         <>
@@ -66,9 +66,9 @@ function Home() {
                     })}
                 </div>
                 <section className="btns">
-                    {auth.role===2&&<button onClick={()=>navigate('/match/create')}>Create a Match</button>}
-                    {auth.role===2&&<button onClick={()=>navigate('/stadium/create')}>Create a Stadium</button>}
-                    {auth.role===3&&<button onClick={()=>navigate('/admin/users')}>View Users</button>}
+                    {auth.role==2&&<button onClick={()=>navigate('/match/create')}>Create a Match</button>}
+                    {auth.role==2&&<button onClick={()=>navigate('/stadium/create')}>Create a Stadium</button>}
+                    {auth.role==3&&<button onClick={()=>navigate('/admin/users')}>View Users</button>}
                 </section>
             </div>
         </>

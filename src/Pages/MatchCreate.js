@@ -96,7 +96,7 @@ function CreateMatch() {
         }
     }
     return (
-        <form className="page" style={{height:"100%"}} action="/" onSubmit={handleCreateMatch}>
+        <form className="page" action="/" onSubmit={handleCreateMatch}>
             <div className="details" style={{height:"100%"}} id="#match">
                 <div className="teams">
                     <div className="team" id="team">

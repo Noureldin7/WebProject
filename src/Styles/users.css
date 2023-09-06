@@ -10,7 +10,7 @@ h2, h3{
 span{
     margin: 0 20px;
     width: 50%;
-    overflow-wrap: break-word;
+    /* overflow-wrap: break-word; */
 }
 .groupContainer{
     padding: 16px;
@@ -25,7 +25,8 @@ span{
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 100%;
+    width: fit-content;
+    padding: 8px;
 }
 .userContainer{
     font-size: large;
@@ -34,7 +35,8 @@ span{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 40%;
+    width: 100%;
+    min-width: fit-content;
     border: 2px solid #56042c;
     border-radius: 10px;
 }

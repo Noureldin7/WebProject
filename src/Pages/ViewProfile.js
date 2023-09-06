@@ -15,6 +15,7 @@ function ViewProfile() {
     const [user, setUser] = useState({});
     const [username, setUsername] = useState("");
     const [pass, setPass] = useState({});
+    console.log(user.birthdate)
     useEffect(()=>{
         get('http://localhost:3001/api/'+userId,auth.token).then((res)=>{
             res.json().then(async (data)=>{
@@ -81,7 +82,7 @@ function ViewProfile() {
         }
     }
     return (
-        <div className="page">
+       user.birthdate && <div className="page">
             <div className="groupContainer">
                 <form action="/" onSubmit={handleEditProfile}>
                     <h2>Profile Details</h2>
@@ -95,24 +96,24 @@ function ViewProfile() {
                     <input type="email" name="email" value={user.email} onChange={handleChange} />
                     {/* <label htmlFor="password">Password</label>
                     <input type="password" name="password" value={user.password} onChange={handleChange} /> */}
-                    {/* <label htmlFor="birthdate">BirthDate</label>
-                    <input type="date" name="birthdate" value={user.birthdate} onChange={handleChange}/> */}
-                    {/* <label htmlFor="gender">Gender</label>
+                    <label htmlFor="birthdate">BirthDate</label>
+                    <input type="date" name="birthdate" value={new Date(user.birthdate).toISOString().split('T')[0]} onChange={handleChange}/>
+                    <label htmlFor="gender">Gender</label>
                     <div className="radios">
-                    <input type="radio" name="gender" value="M" onChange={handleChange} />
+                    <input type="radio" name="gender" value="M" checked={user.gender=='M'} onChange={handleChange} />
                     <label>Male</label>
-                    <input type="radio" name="gender" value="F" onChange={handleChange} />
+                    <input type="radio" name="gender" value="F" checked={user.gender=='F'} onChange={handleChange} />
                     <label>Female</label>
-                </div> */}
+                </div>
                     <label htmlFor="nationality">Nationality</label>
                     <input type="text" name="nationality" value={user.nationality} onChange={handleChange} />
-                    {/* <label htmlFor="role">Role</label>
+                    <label htmlFor="role">Role</label>
                     <div className="radios">
-                    <input type="radio" name="role" value="customer" onChange={handleChange} />
+                    <input type="radio" name="role" value="customer" checked={user.role=='customer'} onChange={handleChange} />
                         <label>Customer</label>
-                        <input type="radio" name="role" value="manager" onChange={handleChange} />
+                        <input type="radio" name="role" value="manager" checked={user.role=='manager'} onChange={handleChange} />
                         <label>Manager</label>
-                    </div> */}
+                    </div>
                     <button type="submit" onClick={handleEditProfile}>Edit</button>
                 </form>
                 <form action="/" onSubmit={handleChangePassword}>

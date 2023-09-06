@@ -31,8 +31,16 @@ function Reservation() {
             matchID:matchId,
             seats:reservedSeats
         }
-        await post('http://localhost:3001/api/reserve',auth.token,payload)
-        navigate("/")
+        const response = await post('http://localhost:3001/api/reserve',auth.token,payload)
+        if(response.status==200)
+        {
+            alert("Success")
+            navigate("/")
+        }
+        else
+        {
+            alert((await response.json()).error)
+        }
     }
     function seatGenerator(seatsPerRow,rowIndex)
     {
@@ -97,18 +105,12 @@ function Reservation() {
                     </div>
                 </section>
                 <section className="refs">
-                    <div className="ref">
                         <label htmlFor="referee">Referee:</label>
                         <h4 name="referee">{match.referee.name}</h4>
-                    </div>
-                    <div className="ref">
                         <label htmlFor="firstlinesman">Lineman 1:</label>
                         <h4 name="firstlinesman">{match.firstLinesman.name}</h4>
-                    </div>
-                    <div className="ref">
                         <label htmlFor="secondlinesman">Lineman 2:</label>
                         <h4 name="secondlinesman">{match.secondLinesman.name}</h4>
-                    </div>
                 </section>
                 <section className="btns">
                     {auth.role==2&&<button onClick={()=>navigate("/match/edit?id="+ matchId)}>Edit Fixture</button>}

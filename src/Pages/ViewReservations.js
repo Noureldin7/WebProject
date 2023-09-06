@@ -43,13 +43,13 @@ function ViewReservations() {
                         <>
                             <div className="fixture">
                                 <div className="team" id="left">
-                                    <img src={reservation.firstTeam.flag} alt="x" height="50px" />
+                                    <img src={reservation.firstTeam.flag} alt="x" height="50px" className="flag"/>
                                 </div>
                                 <div>
                                     <span>VS</span>
                                 </div>
                                 <div className="team" id="right">
-                                    <img src={reservation.secondTeam.flag} alt="x" height="50px" />
+                                    <img src={reservation.secondTeam.flag} alt="x" height="50px" className="flag"/>
                                 </div>
                                 <span style={{textAlign:"center"}}>{reservation.seat}</span>
                                 <button onClick={()=>handleCancel(reservation.ticketId)}>Cancel Ticket</button>
