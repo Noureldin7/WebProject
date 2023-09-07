@@ -54,6 +54,7 @@
 }
 .refs{
     margin-top: 24px;
+    margin-left: 30px;
     display: grid;
     align-items: center;
     justify-items: center;
@@ -61,7 +62,11 @@
     /* grid-template-columns: auto auto auto; */
     grid-auto-flow: column;
     grid-template-rows: auto auto;
-    grid-gap: 0 32px;
+    grid-gap: 0 48px;
+}
+#reserve{
+    padding: 10px;
+    font-size: x-large;
 }
 .btns{
     display: flex;

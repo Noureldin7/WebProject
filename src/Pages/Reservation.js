@@ -82,7 +82,7 @@ function Reservation() {
                         <h4 name="secondlinesman">{match.secondLinesman}</h4>
                 </section>
                 <section className="btns">
-                    <button onClick={handleReserve}>Reserve Seats</button>
+                    <button id="reserve" onClick={handleReserve}>Reserve Seats</button>
                 </section>
             </div>
         </>
