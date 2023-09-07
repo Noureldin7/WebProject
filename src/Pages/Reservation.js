@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
 import { useNavigate, useOutletContext, useSearchParams } from 'react-router-dom';
-
+import { demo_fixtures } from "../Static/Teams"
 import Seat from "../Components/Seat"
 import "../Styles/fixtures.css"
 import "../Styles/reservation.css"
-import { get,post } from "../utils/APICallers";
 
 function toDateTimeStr(dateObj,retVal){
     var date = dateObj.toDateString()
@@ -21,26 +20,12 @@ function Reservation() {
     const navigate = useNavigate();
     const [params, setParams] = useSearchParams();
     const matchId = params.get("id");
-    const [auth,setAuth] = useOutletContext();
     const [reservedSeats,setReservedSeats] = useState([]);
-    const [match,setMatch] = useState();
-    console.log(match)
+    const [match,setMatch] = useState(demo_fixtures[parseInt(matchId)]);
     async function handleReserve()
     {
-        const payload = {
-            matchID:matchId,
-            seats:reservedSeats
-        }
-        const response = await post('http://localhost:3001/api/reserve',auth.token,payload)
-        if(response.status==200)
-        {
-            alert("Success")
-            navigate("/")
-        }
-        else
-        {
-            alert((await response.json()).error)
-        }
+        alert("Success")
+        navigate("/")
     }
     function seatGenerator(seatsPerRow,rowIndex)
     {
@@ -48,7 +33,7 @@ function Reservation() {
         const rowChar = String.fromCharCode('A'.charCodeAt() + rowIndex);
         for (let index = 0; index < seatsPerRow; index++) {
             const rowNumber = rowChar + index
-            const state = match.seats.includes(rowNumber)?-1:0
+            const state = 0
             row.push(<Seat rowNumber={rowNumber} reservedSeats={reservedSeats} setReservedSeats={setReservedSeats} state={state}/>);
         }
         return row;
@@ -61,23 +46,7 @@ function Reservation() {
         }
         return stadium;
     }
-    // console.log(match)
-    useEffect(()=>{
-        get('http://localhost:3001/api/match/'+matchId,auth.token).then((res)=>{
-            res.json().then((data)=>{
-                setMatch(data);
-            })
-        })
-        // const poll = setInterval(()=>{
-        //     get('http://localhost:3001/api/match/'+matchId,auth.token).then((res)=>{
-        //         res.json().then((data)=>{
-        //             // console.log(match)
-        //             setMatch(data);
-        //         })
-        //     })
-        // },4000)
-        // return ()=>clearInterval(poll)
-    },[matchId])
+    console.log(match)
     return (
         match && <>
             <div className="details">
@@ -106,15 +75,14 @@ function Reservation() {
                 </section>
                 <section className="refs">
                         <label htmlFor="referee">Referee:</label>
-                        <h4 name="referee">{match.referee.name}</h4>
+                        <h4 name="referee">{match.referee}</h4>
                         <label htmlFor="firstlinesman">Lineman 1:</label>
-                        <h4 name="firstlinesman">{match.firstLinesman.name}</h4>
+                        <h4 name="firstlinesman">{match.firstLinesman}</h4>
                         <label htmlFor="secondlinesman">Lineman 2:</label>
-                        <h4 name="secondlinesman">{match.secondLinesman.name}</h4>
+                        <h4 name="secondlinesman">{match.secondLinesman}</h4>
                 </section>
                 <section className="btns">
-                    {auth.role==2&&<button onClick={()=>navigate("/match/edit?id="+ matchId)}>Edit Fixture</button>}
-                    {auth.role%3>0&&<button onClick={handleReserve}>Reserve Seats</button>}
+                    <button onClick={handleReserve}>Reserve Seats</button>
                 </section>
             </div>
         </>

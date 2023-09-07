@@ -4,7 +4,6 @@ import { useNavigate, useOutletContext, useSearchParams } from 'react-router-dom
 import Seat from "../Components/Seat"
 import "../Styles/fixtures.css"
 import "../Styles/reservation.css"
-import { post } from "../utils/APICallers";
 
 
 function StadiumCreate() {
@@ -32,15 +31,8 @@ function StadiumCreate() {
     }
     async function handleCreateStadium()
     {
-        const response = await post('http://localhost:3001/api/stadium',auth.token,stadium)
-        if(response.status===200)
-        {
-            navigate("/")
-        }
-        else
-        {
-            alert((await response.json()).message)
-        }
+        alert("Success")
+        navigate("/")
     }
     function handleChange(e){
         const key = e.target.name
